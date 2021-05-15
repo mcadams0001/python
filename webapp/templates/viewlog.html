@@ -4,6 +4,10 @@
 
 <h2> {{the_title }}</h2>
 
+{% if the_message %}
+<div style="color: red;"> {{the_message}}</div>
+{% endif %}
+
 <table>
     <tr>
         {% for row_title in the_row_titles %}
