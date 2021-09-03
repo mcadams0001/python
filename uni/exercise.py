@@ -1,24 +1,30 @@
 
 balance = 100.0
 rate = 0.03
+num_periods = 10
 
 print(0, round(balance,2))
-for n in range(1,11):
+for n in range(1,num_periods):
     balance = round(balance * (1 + rate), 2)
     print(n, round(balance,2))
     
+balance = 100.0    
+
 def compound(balance, rate, num_periods):
-    current_balance = balance
-    print(0, round(current_balance,2))
+    current_balance = round(balance,2)
+    print(0, current_balance)
     for n in range(1,num_periods):
         current_balance = round(current_balance * (1 + rate), 2)
         print(n, current_balance)
     return current_balance
 
 def compound_by_period(balance, rate, num_periods):
+    """
+    Calculates the compound balance after number of periods for given interest rate
+    """
     balances = []
-    current_balance = balance
-    print(0, round(current_balance,2))
+    current_balance = round(balance,2)
+    print(0, current_balance)
     balances.append(current_balance)
     for n in range(1,num_periods):
         current_balance = round(current_balance * (1 + rate), 2)
@@ -29,14 +35,18 @@ def compound_by_period(balance, rate, num_periods):
 def change_per_period(balances):
     change = []
     for i in range(1,len(balances)):
-        change.append(balances[i]-balances[i-1])
+        change.append(round(balances[i]-balances[i-1],2))
     return change
 
-print("--- compound")
-compound(100.0, 0.03, 11)
+print("--- compound initial balance:", balance)
+compound(balance, rate, num_periods)
 
-print("--- compound_by_period")
-print(compound_by_period(100.0, 0.03, 11))
+print("--- compound_by_period initial balance", balance)
+balances = compound_by_period(balance, rate, num_periods)
+print(balances)
+
+print("--- change_per_period initial balance", balance)
+print(change_per_period(balances))
 
 print("--- wheat")
 wheat =compound_by_period(1, 1, 64)
